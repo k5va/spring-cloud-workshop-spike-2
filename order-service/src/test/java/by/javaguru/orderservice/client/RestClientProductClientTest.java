@@ -26,9 +26,9 @@ class RestClientProductClientTest {
     private ServerSocket closedSocket;
 
     private void setUpAgainst(String baseUrl) {
-        RestClient.Builder builder = RestClient.builder();
+        RestClient.Builder builder = RestClient.builder().baseUrl(baseUrl);
         mockServer = org.springframework.test.web.client.MockRestServiceServer.bindTo(builder).build();
-        productClient = new RestClientProductClient(builder, baseUrl);
+        productClient = new RestClientProductClient(builder.build());
     }
 
     @AfterEach
@@ -56,7 +56,8 @@ class RestClientProductClientTest {
         closedSocket.close();
         closedSocket = null;
 
-        productClient = new RestClientProductClient(RestClient.builder(), "http://localhost:" + unusedPort);
+        productClient = new RestClientProductClient(
+                RestClient.builder().baseUrl("http://localhost:" + unusedPort).build());
 
         assertThatThrownBy(() -> productClient.getProduct(1L))
                 .isInstanceOf(ProductServiceUnavailableException.class);
