@@ -36,7 +36,7 @@ cd product-service && ./mvnw spring-boot:run   # слушает :8080
 cd order-service && ./mvnw spring-boot:run     # слушает :8080, ждёт product-service на PRODUCT_SERVICE_BASE_URL
 ```
 
-По умолчанию `order-service` обращается к `product-service` по `http://localhost:8081` (см. `product-service.base-url` в `application.properties`) — при локальном запуске переопределите порт `product-service` через `--server.port=8081`, либо задайте `PRODUCT_SERVICE_BASE_URL`.
+По умолчанию `order-service` обращается к `product-service` по `http://localhost:8081` (см. `product-service.base-url` в `application.yml`) — при локальном запуске переопределите порт `product-service` через `--server.port=8081`, либо задайте `PRODUCT_SERVICE_BASE_URL`.
 
 ## Тесты
 
