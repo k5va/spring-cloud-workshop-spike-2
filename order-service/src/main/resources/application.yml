@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: order-service
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+product-service:
+  base-url: ${PRODUCT_SERVICE_BASE_URL:http://localhost:8081}
