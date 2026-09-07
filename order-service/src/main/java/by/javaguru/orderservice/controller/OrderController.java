@@ -25,19 +25,17 @@ public class OrderController {
 
     @GetMapping
     public List<OrderResponse> getAllOrders() {
-        return orderService.getAllOrders().stream()
-                .map(OrderResponse::from)
-                .toList();
+        return orderService.getAllOrders();
     }
 
     @GetMapping("/{id}")
     public OrderResponse getOrderById(@PathVariable Long id) {
-        return OrderResponse.from(orderService.getOrderById(id));
+        return orderService.getOrderById(id);
     }
 
     @PostMapping
     public ResponseEntity<OrderResponse> createOrder(@Valid @RequestBody CreateOrderRequest request) {
-        OrderResponse response = OrderResponse.from(orderService.createOrder(request));
+        OrderResponse response = orderService.createOrder(request);
         return ResponseEntity.created(URI.create("/orders/" + response.id())).body(response);
     }
 }

@@ -19,13 +19,11 @@ public class ProductController {
 
     @GetMapping
     public List<ProductResponse> getAllProducts() {
-        return productService.getAllProducts().stream()
-                .map(ProductResponse::from)
-                .toList();
+        return productService.getAllProducts();
     }
 
     @GetMapping("/{id}")
     public ProductResponse getProductById(@PathVariable Long id) {
-        return ProductResponse.from(productService.getProductById(id));
+        return productService.getProductById(id);
     }
 }
