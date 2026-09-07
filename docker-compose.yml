@@ -1,0 +1,15 @@
+services:
+  product-service:
+    build: ./product-service
+    ports:
+      - "8081:8080"
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "8082:8080"
+    environment:
+      PRODUCT_SERVICE_BASE_URL: http://product-service:8080
+    depends_on:
+      product-service:
+        condition: service_healthy

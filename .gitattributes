@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+justfile text eol=lf
+*.sh text eol=lf
