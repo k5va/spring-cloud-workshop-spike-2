@@ -8,6 +8,10 @@ set shell := ["sh", "-cu"]
 up:
     docker compose up -d --build --wait
 
+# Build and start the stack with N instances of product-service, waiting for them to become healthy.
+up-scaled n:
+    docker compose up -d --build --wait --scale product-service={{n}}
+
 # Stop and remove the infrastructure.
 down:
     docker compose down
