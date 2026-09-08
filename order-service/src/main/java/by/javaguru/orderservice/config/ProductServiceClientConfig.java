@@ -9,11 +9,13 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class ProductServiceClientConfig {
 
-    // Plain builder kept @Primary so unqualified injection points (e.g. the Eureka
-    // client's own HTTP calls to discovery-server) don't pick up the load-balanced one below.
+    // Declaring a RestClient.Builder bean here suppresses Boot's own default one
+    // (RestClientAutoConfiguration backs off once any such bean exists), so without this
+    // @Primary bean the Eureka client's internal registration/heartbeat calls would pick up
+    // the @LoadBalanced builder below and fail trying to load-balance "discovery-server".
     @Bean
     @Primary
-    public RestClient.Builder restClientBuilder() {
+    public RestClient.Builder defaultRestClientBuilder() {
         return RestClient.builder();
     }
 
