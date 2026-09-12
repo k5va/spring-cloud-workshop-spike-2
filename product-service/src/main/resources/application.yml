@@ -10,3 +10,12 @@ management:
     web:
       exposure:
         include: health
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
